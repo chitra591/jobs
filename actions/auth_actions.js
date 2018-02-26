@@ -1,4 +1,4 @@
-import { AsynsStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 import {
   FACEBOK_LOGIN_SUCCESS,
@@ -9,7 +9,8 @@ import {
 // AsynsStorage.getItem('fb_token');
 
 export const facebookLogin = () => async dispatch => {
-  let token = await AsynsStorage.getItem('fb_token');
+  let token = await AsyncStorage.getItem('fb_token');
+  console.log('token : '+token);
   if (token) {
     // Dispatch an action saying FB login done
     dispatch({ type: FACEBOK_LOGIN_SUCCESS, payload: token });
@@ -27,6 +28,6 @@ const doFacebookLogin = async dispatch => {
     return dispatch({ type: FACEBOK_LOGIN_FAIL })
   }
 
-  await AsynsStorage.setItem('fb_token', token);
+  await AsyncStorage.setItem('fb_token', token);
   dispatch({ type: FACEBOK_LOGIN_SUCCESS, payload: token });
 };
